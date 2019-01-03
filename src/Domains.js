@@ -29,9 +29,12 @@ Requests.HttpClient(API_KEY, API_ID, domains_url, function(responseText){
       words.push(response["results"][i]["id"]);
     }
     const random_word = domains[Math.floor(Math.random()*words.length)];
-    const word_url =  "https://od-api.oxforddictionaries.com:443/api/v1/inflections/" + language + "/" + random_word;
+    const word_url =  "https://webknox-words.p.rapidapi.com/words/" + random_word + "/plural";
     parse_word(random_word);
     Requests.RapidHttpClient(RAPID_API_KEY, word_url, function(responseText){
+      var response = JSON.parse(responseText);
+      console.log("Your band name is:");
+      console.log("The " + response.plural);
     });
   });
 });

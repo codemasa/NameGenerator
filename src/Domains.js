@@ -7,10 +7,7 @@ const API_KEY = API.Key;
 const API_ID = API.Id;
 const RAPID_API_KEY = API.Rapid_key;
 const regex = /^[\w\-\s]+$/;
-function parse_word(word){
-  regex.exec(word);
-  console.log(word);
-}
+
 
 
 Requests.HttpClient(API_KEY, API_ID, domains_url, function(responseText){
@@ -30,11 +27,11 @@ Requests.HttpClient(API_KEY, API_ID, domains_url, function(responseText){
     }
     const random_word = domains[Math.floor(Math.random()*words.length)];
     const word_url =  "https://webknox-words.p.rapidapi.com/words/" + random_word + "/plural";
-    parse_word(random_word);
+    console.log(random_word);
     Requests.RapidHttpClient(RAPID_API_KEY, word_url, function(responseText){
       var response = JSON.parse(responseText);
       console.log("Your band name is:");
-      console.log("The " + response.plural);
+      console.log("The " + response.plural.replace(/_/g, " "));
     });
   });
 });
